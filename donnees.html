@@ -1,25 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Résultats - Comparaison IRVE</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Données - IRVE</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #a4d4ae;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Comparaison IRVE : Paris 18e / Enghien-les-Bains</h1>
-        <nav>
-            <a href="index.html">Accueil</a>
-            <a href="donnees.html">Données</a>
-            <a href="resultats.html">Résultats</a>
-        </nav>
-    </header>
-    <main>
-        <h2>Analyse comparative</h2>
-        <p>Ici seront présentés les résultats de l’analyse, sous forme de textes, de tableaux ou de graphiques (nombre de bornes, accessibilité, couverture territoriale, etc.).</p>
-    </main>
-    <footer>
-        <p>© 2025 - Aglaé & Jules</p>
-    </footer>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="donnees.html">Données</a>
+    <a href="resultats.html">Résultats</a>
+  </nav>
+
+  <h1>Données IRVE</h1>
+  <p>Voici les données issues du fichier sur les IRVE du 18e arrondissement de Paris et d’Enghien-les-Bains.</p>
+
+  <table id="csvTable"></table>
+
+  <script>
+    // Les données extraites de ton fichier Excel (simplifiées pour affichage)
+    const csvData = `Commune,Adresse,Type d'accès,Nombres de points de recharge
+Paris 18e,35 Rue Ramey,Public,2
+Paris 18e,10 Rue Letort,Public,2
+Paris 18e,Place Jules Joffrin,Public,3
+Enghien-les-Bains,1 Rue de Malleville,Public,1
+Enghien-les-Bains,10 Avenue de Ceinture,Public,2
+Enghien-les-Bains,7 Boulevard d'Ormesson,Public,1`;
+
+    function displayCSV(data) {
+      const rows = data.split('\n');
+      const table = document.getElementById("csvTable");
+
+      rows.forEach((row, rowIndex) => {
+        const tr = document.createElement("tr");
+        const cols = row.split(',');
+
+        cols.forEach(col => {
+          const cell = document.createElement(rowIndex === 0 ? "th" : "td");
+          cell.textContent = col;
+          tr.appendChild(cell);
+        });
+
+        table.appendChild(tr);
+      });
+    }
+
+    displayCSV(csvData);
+  </script>
 </body>
 </html>
