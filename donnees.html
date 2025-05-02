@@ -2,21 +2,17 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Données - IRVE</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Données</title>
   <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+    nav {
+      background-color: #4CAF50;
+      padding: 10px;
     }
-    th, td {
-      border: 1px solid #444;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #a4d4ae;
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -27,40 +23,9 @@
     <a href="resultats.html">Résultats</a>
   </nav>
 
-  <h1>Données IRVE</h1>
-  <p>Voici les données issues du fichier sur les IRVE du 18e arrondissement de Paris et d’Enghien-les-Bains.</p>
+  <h1>Données utilisées</h1>
+  <p>Nous avons extrait les données sur les bornes de recharge (IRVE) dans les deux territoires.</p>
 
-  <table id="csvTable"></table>
-
-  <script>
-    // Les données extraites de ton fichier Excel (simplifiées pour affichage)
-    const csvData = `Commune,Adresse,Type d'accès,Nombres de points de recharge
-Paris 18e,35 Rue Ramey,Public,2
-Paris 18e,10 Rue Letort,Public,2
-Paris 18e,Place Jules Joffrin,Public,3
-Enghien-les-Bains,1 Rue de Malleville,Public,1
-Enghien-les-Bains,10 Avenue de Ceinture,Public,2
-Enghien-les-Bains,7 Boulevard d'Ormesson,Public,1`;
-
-    function displayCSV(data) {
-      const rows = data.split('\n');
-      const table = document.getElementById("csvTable");
-
-      rows.forEach((row, rowIndex) => {
-        const tr = document.createElement("tr");
-        const cols = row.split(',');
-
-        cols.forEach(col => {
-          const cell = document.createElement(rowIndex === 0 ? "th" : "td");
-          cell.textContent = col;
-          tr.appendChild(cell);
-        });
-
-        table.appendChild(tr);
-      });
-    }
-
-    displayCSV(csvData);
-  </script>
+  <p>Voir les données complètes issues du fichier Excel intégré ici (à faire manuellement en HTML ou avec un outil de visualisation).</p>
 </body>
 </html>
