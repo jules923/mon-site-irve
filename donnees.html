@@ -14,6 +14,23 @@
       margin: 10px;
       font-weight: bold;
     }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #cde9c4;
+    }
   </style>
 </head>
 <body>
@@ -23,9 +40,36 @@
     <a href="resultats.html">Résultats</a>
   </nav>
 
-  <h1>Données utilisées</h1>
-  <p>Nous avons extrait les données sur les bornes de recharge (IRVE) dans les deux territoires.</p>
+  <h1>Données IRVE</h1>
+  <p>Ci-dessous, les données collectées sur les bornes de recharge (IRVE) dans le 18ème arrondissement de Paris et à Enghien-les-Bains, extraites directement du fichier CSV :</p>
 
-  <p>Voir les données complètes issues du fichier Excel intégré ici (à faire manuellement en HTML ou avec un outil de visualisation).</p>
+  <div id="table-container">Chargement des données...</div>
+
+  <script>
+    async function chargerCSV(url) {
+      const response = await fetch(url);
+      const data = await response.text();
+      const lignes = data.split('\n').filter(line => line.trim() !== '');
+      const table = document.createElement('table');
+
+      lignes.forEach((ligne, index) => {
+        const row = document.createElement('tr');
+        const colonnes = ligne.split(',');
+
+        colonnes.forEach(colonne => {
+          const cellule = document.createElement(index === 0 ? 'th' : 'td');
+          cellule.textContent = colonne.trim();
+          row.appendChild(cellule);
+        });
+
+        table.appendChild(row);
+      });
+
+      document.getElementById('table-container').innerHTML = '';
+      document.getElementById('table-container').appendChild(table);
+    }
+
+    chargerCSV('donnees.csv');
+  </script>
 </body>
 </html>
