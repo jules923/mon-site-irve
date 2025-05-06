@@ -45,31 +45,32 @@
 
   <div id="table-container">Chargement des données...</div>
 
-  <script>
-    async function chargerCSV(url) {
-      const response = await fetch(url);
-      const data = await response.text();
-      const lignes = data.split('\n').filter(line => line.trim() !== '');
-      const table = document.createElement('table');
+<script>
+  async function chargerCSV(url) {
+    const response = await fetch(url);
+    const data = await response.text();
+    const lignes = data.split('\n').filter(line => line.trim() !== '');
+    const table = document.createElement('table');
 
-      lignes.forEach((ligne, index) => {
-        const row = document.createElement('tr');
-        const colonnes = ligne.split(',');
+    lignes.forEach((ligne, index) => {
+      const row = document.createElement('tr');
+      const colonnes = ligne.split(';');
 
-        colonnes.forEach(colonne => {
-          const cellule = document.createElement(index === 0 ? 'th' : 'td');
-          cellule.textContent = colonne.trim();
-          row.appendChild(cellule);
-        });
-
-        table.appendChild(row);
+      colonnes.forEach(colonne => {
+        const cellule = document.createElement(index === 0 ? 'th' : 'td');
+        cellule.textContent = colonne.trim();
+        row.appendChild(cellule);
       });
 
-      document.getElementById('table-container').innerHTML = '';
-      document.getElementById('table-container').appendChild(table);
-    }
+      table.appendChild(row);
+    });
 
-    chargerCSV('donnees.csv');
-  </script>
+    document.getElementById('table-container').innerHTML = '';
+    document.getElementById('table-container').appendChild(table);
+  }
+
+  chargerCSV('donnees.csv');
+</script>
+
 </body>
 </html>
